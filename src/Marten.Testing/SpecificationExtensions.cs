@@ -59,7 +59,6 @@ namespace Marten.Testing
             actual.Any(expected).ShouldBeTrue();
         }
 
-
         public static void ShouldHaveTheSameElementsAs<T>(this IEnumerable<T> actual, IEnumerable<T> expected)
         {
             var actualList = (actual is IList) ? (IList)actual : actual.ToList();
@@ -101,16 +100,6 @@ namespace Marten.Testing
             }
         }
 
-        public static void ShouldBeFalse(this bool condition)
-        {
-            condition.ShouldBe(false);
-        }
-
-        public static void ShouldBeTrue(this bool condition)
-        {
-            condition.ShouldBe(true);
-        }
-
         public static void ShouldBeNull(this object anObject)
         {
             anObject.ShouldBe(null);
@@ -149,7 +138,6 @@ namespace Marten.Testing
             actual.GetType().ShouldNotBe(expected);
         }
 
-
         public static IComparable ShouldBeGreaterThan(this IComparable arg1, IComparable arg2)
         {
             (arg1.CompareTo(arg2) > 0).ShouldBeTrue();
@@ -175,7 +163,6 @@ namespace Marten.Testing
             return actual;
         }
 
-
         public static void ShouldStartWith(this string actual, string expected)
         {
             actual.StartsWith(expected).ShouldBeTrue();
@@ -197,10 +184,8 @@ namespace Marten.Testing
 
             exception.ShouldNotBeNull("Expected {0} to be thrown.".ToFormat(exceptionType.FullName));
 
-
             return exception;
         }
-
 
         public static void ShouldContain(this DbObjectName[] names, string qualifiedName)
         {

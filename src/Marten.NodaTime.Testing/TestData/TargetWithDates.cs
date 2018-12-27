@@ -3,7 +3,7 @@ using NodaTime;
 
 namespace Marten.NodaTime.Testing.TestData
 {
-    public class TargetWithDates
+    public class TargetWithDates : IEquatable<TargetWithDates>
     {
         public Guid Id { get; set; }
         public DateTime DateTime { get; set; }
@@ -16,9 +16,9 @@ namespace Marten.NodaTime.Testing.TestData
         public LocalDateTime LocalDateTime { get; set; }
         public LocalDateTime? NullableLocalDateTime { get; set; }
 
-        internal static TargetWithDates Generate()
+        internal static TargetWithDates Generate(DateTime? defaultDateTime = null)
         {
-            var dateTime = DateTime.UtcNow;
+            var dateTime = defaultDateTime ?? DateTime.UtcNow;
             var localDateTime = LocalDateTime.FromDateTime(dateTime);
 
             return new TargetWithDates
@@ -33,6 +33,23 @@ namespace Marten.NodaTime.Testing.TestData
                 LocalDateTime = localDateTime,
                 NullableLocalDateTime = localDateTime
             };
+        }
+
+        public bool Equals(TargetWithDates other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return DateTime == other.DateTime
+                && NullableDateTime == other.NullableDateTime
+                && DateTimeOffset == other.DateTimeOffset
+                && NullableDateTimeOffset == other.NullableDateTimeOffset
+                && LocalDate == other.LocalDate
+                && NullableLocalDate == other.NullableLocalDate
+                && LocalDateTime == other.LocalDateTime
+                && NullableLocalDateTime == other.NullableLocalDateTime;
         }
     }
 }
