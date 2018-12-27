@@ -109,7 +109,7 @@ namespace Marten.Schema
 
         public bool ShouldUseContainmentOperator()
         {
-            return MemberType.IsOneOf();
+            return ContainmentOperatorTypes.Contains(MemberType);
         }
 
         public static List<Type> ContainmentOperatorTypes = new List<Type>

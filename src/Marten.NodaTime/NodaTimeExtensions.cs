@@ -19,15 +19,15 @@ namespace Marten.NodaTime
             JsonLocatorField.ContainmentOperatorTypes.Add(typeof(LocalDate));
             JsonLocatorField.ContainmentOperatorTypes.Add(typeof(LocalDateTime));
 
-            JsonLocatorField.TimespanTypes.Add(typeof(Instant));
-            JsonLocatorField.TimespanTypes.Add(typeof(Instant?));
-            JsonLocatorField.TimespanTypes.Add(typeof(LocalDateTime)); ;
-            JsonLocatorField.TimespanTypes.Add(typeof(LocalDateTime?));
+            //JsonLocatorField.TimespanTypes.Add(typeof(Instant));
+            //JsonLocatorField.TimespanTypes.Add(typeof(Instant?));
+            //JsonLocatorField.TimespanTypes.Add(typeof(LocalDateTime));
+            //JsonLocatorField.TimespanTypes.Add(typeof(LocalDateTime?));
 
-            JsonLocatorField.TimespanZTypes.Add(typeof(ZonedDateTime));
-            JsonLocatorField.TimespanZTypes.Add(typeof(ZonedDateTime?));
-            JsonLocatorField.TimespanZTypes.Add(typeof(OffsetDateTime));
-            JsonLocatorField.TimespanZTypes.Add(typeof(OffsetDateTime?));
+            //JsonLocatorField.TimespanZTypes.Add(typeof(ZonedDateTime));
+            //JsonLocatorField.TimespanZTypes.Add(typeof(ZonedDateTime?));
+            //JsonLocatorField.TimespanZTypes.Add(typeof(OffsetDateTime));
+            //JsonLocatorField.TimespanZTypes.Add(typeof(OffsetDateTime?));
 
             var serializer = new JsonNetSerializer();
             serializer.Customize(s => s.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb));

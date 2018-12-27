@@ -38,7 +38,7 @@ namespace Marten.NodaTime.Testing.Acceptance
         {
             StoreOptions(_ => _.UseNodaTime());
 
-            var dateTime = DateTime.UtcNow;
+            var dateTime = new DateTime(636815202809001827);// DateTime.UtcNow;
             var localDateTime = LocalDateTime.FromDateTime(dateTime);
             var testDoc = TargetWithDates.Generate(dateTime);
 
