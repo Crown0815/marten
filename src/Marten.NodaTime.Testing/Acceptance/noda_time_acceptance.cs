@@ -40,6 +40,7 @@ namespace Marten.NodaTime.Testing.Acceptance
 
             var dateTime = new DateTime(636815202809001827);// DateTime.UtcNow;
             var localDateTime = LocalDateTime.FromDateTime(dateTime);
+            var instantUTC = Instant.FromDateTimeUtc(dateTime.ToUniversalTime());
             var testDoc = TargetWithDates.Generate(dateTime);
 
             using (var session = theStore.OpenSession())
@@ -52,15 +53,48 @@ namespace Marten.NodaTime.Testing.Acceptance
             {
                 var results = new List<TargetWithDates>
                 {
-                    //query.Query<TargetWithDates>().FirstOrDefault(d => d.DateTime == dateTime),
-                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDateTime == localDateTime),
-                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDate == localDateTime.Date)
-                };
+                    // LocalDate
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDate == localDateTime.Date),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDate < localDateTime.Date.PlusDays(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDate <= localDateTime.Date.PlusDays(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDate > localDateTime.Date.PlusDays(-1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDate >= localDateTime.Date.PlusDays(-1)),
 
-                ////var q = query.Query<TargetWithDates>().Where(d => d.DateTime.Equals(dateTime));
-                ////var q2 = query.Query<TargetWithDates>().Where(d => d.LocalDateTime.Equals(localDateTime));
-                ////var res = q.ToList();
-                ////var res2 = q2.ToList();
+                    //// Nullable LocalDate
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDate == localDateTime.Date),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDate < localDateTime.Date.PlusDays(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDate <= localDateTime.Date.PlusDays(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDate > localDateTime.Date.PlusDays(-1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDate >= localDateTime.Date.PlusDays(-1)),
+
+                    //// LocalDateTime
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDateTime == localDateTime),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDateTime < localDateTime.PlusSeconds(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDateTime <= localDateTime.PlusSeconds(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDateTime > localDateTime.PlusSeconds(-1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.LocalDateTime >= localDateTime.PlusSeconds(-1)),
+
+                    //// Nullable LocalDateTime
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDateTime == localDateTime),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDateTime < localDateTime.PlusSeconds(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDateTime <= localDateTime.PlusSeconds(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDateTime > localDateTime.PlusSeconds(-1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableLocalDateTime >= localDateTime.PlusSeconds(-1)),
+
+                    //// Instant UTC
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.InstantUTC == instantUTC),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.InstantUTC < instantUTC.PlusTicks(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.InstantUTC <= instantUTC.PlusTicks(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.InstantUTC > instantUTC.PlusTicks(-1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.InstantUTC >= instantUTC.PlusTicks(-1)),
+
+                    // Nullable Instant UTC
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableInstantUTC == instantUTC),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableInstantUTC < instantUTC.PlusTicks(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableInstantUTC <= instantUTC.PlusTicks(1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableInstantUTC > instantUTC.PlusTicks(-1)),
+                    query.Query<TargetWithDates>().FirstOrDefault(d => d.NullableInstantUTC >= instantUTC.PlusTicks(-1))
+                };
 
                 results.ShouldAllBe(x => x.Equals(testDoc));
             }

@@ -19,8 +19,8 @@ namespace Marten.NodaTime
             JsonLocatorField.ContainmentOperatorTypes.Add(typeof(LocalDate));
             JsonLocatorField.ContainmentOperatorTypes.Add(typeof(LocalDateTime));
 
-            //JsonLocatorField.TimespanTypes.Add(typeof(Instant));
-            //JsonLocatorField.TimespanTypes.Add(typeof(Instant?));
+            //JsonLocatorField.TimespanZTypes.Add(typeof(Instant));
+            //JsonLocatorField.TimespanZTypes.Add(typeof(Instant?));
             //JsonLocatorField.TimespanTypes.Add(typeof(LocalDateTime));
             //JsonLocatorField.TimespanTypes.Add(typeof(LocalDateTime?));
 
