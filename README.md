@@ -22,7 +22,7 @@ Before getting started you will need the following in your environment:
 * You will also need to enable the PLV8 extension inside of PostgreSQL for running JavaScript stored procedures for the nascent projection support. See
 [this link](http://www.postgresonline.com/journal/archives/360-PLV8-binaries-for-PostgreSQL-9.5-windows-both-32-bit-and-64-bit.html) for pre-built binaries for PLV8 running on Windows
 * You will also need to make sure that the login you are using to connect to your databasee is a member of the `postgres` role
-* Ensure you have installed [.NET Core SDK 2.0](https://www.microsoft.com/net/download/core)
+* Ensure you have installed [.NET Core SDK 2.1](https://www.microsoft.com/net/download/core)
 * Once you have the codebase and the connection string file, run the rake script or use the dotnet CLI to restore and build the solution.
 
 You are now ready to contribute to Marten.
@@ -79,13 +79,11 @@ dotnet restore src\Marten.sln
 dotnet build src\Marten.sln
 
 # running tests for a specific target framework
-dotnet test src\Marten.Testing\Marten.Testing.csproj --framework netcoreapp2.0
+dotnet test src\Marten.Testing\Marten.Testing.csproj --framework netcoreapp2.1
 
 # mocha tests
-npm install
-npm run test
+dotnet run -p martenbuild.csproj -- mocha
 
 # running documentation website locally
-dotnet restore docs.csproj
-dotnet stdocs run
+dotnet run -p martenbuild.csproj -- docs
 ```
